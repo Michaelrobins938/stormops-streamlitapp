@@ -3,9 +3,5 @@ pandas
 numpy
 sqlalchemy
 plotly
-sqlite3
-uuid
 requests
 python-dotenv
-geopandas
-shapely
