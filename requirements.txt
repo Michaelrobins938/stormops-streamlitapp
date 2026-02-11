@@ -5,8 +5,7 @@ sqlalchemy
 plotly
 sqlite3
 uuid
+requests
+python-dotenv
 geopandas
 shapely
-requests
-openai
-python-dotenv
