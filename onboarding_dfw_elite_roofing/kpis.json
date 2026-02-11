@@ -1,0 +1,82 @@
+{
+  "operational": {
+    "response_time": {
+      "metric": "Hours from storm detection to first door knock",
+      "target": "<6 hours",
+      "baseline": "24-48 hours (manual)",
+      "measurement": "Timestamp of storm load \u2192 First logged touch"
+    },
+    "doors_per_hour": {
+      "metric": "Doors knocked per canvassing hour",
+      "target": "10-15 doors/hour",
+      "baseline": "6-8 doors/hour (manual routing)",
+      "measurement": "Total touches / Total canvassing hours"
+    },
+    "system_adoption": {
+      "metric": "% of leads sourced from StormOps",
+      "target": ">80%",
+      "baseline": "0% (all manual)",
+      "measurement": "StormOps leads / Total leads worked"
+    }
+  },
+  "conversion": {
+    "lead_to_inspection": {
+      "metric": "% of leads that result in inspection",
+      "target": "40-60%",
+      "baseline": "20-30% (manual)",
+      "measurement": "Inspections / Total leads"
+    },
+    "inspection_to_contract": {
+      "metric": "% of inspections that convert to signed contract",
+      "target": "50-70%",
+      "baseline": "30-40% (manual)",
+      "measurement": "Contracts / Inspections"
+    },
+    "overall_conversion": {
+      "metric": "% of leads that convert to contract",
+      "target": "30-50%",
+      "baseline": "10-15% (manual)",
+      "measurement": "Contracts / Total leads"
+    }
+  },
+  "economics": {
+    "cac": {
+      "metric": "Customer Acquisition Cost",
+      "target": "<$1500",
+      "baseline": "$2500-3500 (manual)",
+      "measurement": "(Labor + Marketing) / Conversions"
+    },
+    "revenue_per_hour": {
+      "metric": "Revenue generated per canvassing hour",
+      "target": "$750-1000/hour",
+      "baseline": "$300-500/hour (manual)",
+      "measurement": "(Contracts \u00d7 Avg Deal Size) / Canvassing Hours"
+    },
+    "roi": {
+      "metric": "Return on Investment",
+      "target": ">300%",
+      "baseline": "150-200% (manual)",
+      "measurement": "(Revenue - Costs) / Costs"
+    }
+  },
+  "quality": {
+    "attribution_accuracy": {
+      "metric": "Team confidence in channel attribution",
+      "target": "8+/10",
+      "baseline": "N/A (no attribution)",
+      "measurement": "Weekly survey: 1-10 scale"
+    },
+    "play_effectiveness": {
+      "metric": "Conversion rate by play",
+      "target": "Financing_Aggressive: 40%+, Impact_Report: 35%+",
+      "baseline": "N/A (no plays)",
+      "measurement": "Conversions / Touches per play"
+    },
+    "sii_predictive_power": {
+      "metric": "Correlation between SII and conversion",
+      "target": "r > 0.6",
+      "baseline": "N/A",
+      "measurement": "Pearson correlation(SII_v2, converted)"
+    }
+  }
+}

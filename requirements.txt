@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+sqlalchemy
+plotly
+sqlite3
+uuid
+geopandas
+shapely
+requests
+openai
+python-dotenv

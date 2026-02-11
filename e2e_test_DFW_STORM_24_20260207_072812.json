@@ -1,0 +1,48 @@
+{
+  "sii_v2": {
+    "total_scored": 61,
+    "avg_score": 66.07369389931021,
+    "status": "PASS"
+  },
+  "personas": {
+    "total_assigned": 61,
+    "distribution": {
+      "Deal_Hunter": 27,
+      "Proof_Seeker": 17,
+      "Family_Protector": 11,
+      "Status_Conscious": 6
+    },
+    "status": "PASS"
+  },
+  "uplift": {
+    "total_predictions": 61,
+    "avg_uplift": 0.2857377049180328,
+    "status": "PASS"
+  },
+  "journeys": {
+    "total_events": 208,
+    "unique_properties": 61,
+    "conversions": 31,
+    "conversion_rate": 0.5081967213114754,
+    "status": "PASS"
+  },
+  "attribution": {
+    "channels_attributed": 5,
+    "total_credit": 1.0,
+    "conversions": 4,
+    "status": "PASS"
+  },
+  "plays": {
+    "plays_executed": 8,
+    "total_touches": 208,
+    "conversions": 31,
+    "status": "PASS"
+  },
+  "kpis": {
+    "conversion_rate": 0.5081967213114754,
+    "revenue_per_hour": 22355.76923076923,
+    "cac": 167.74193548387098,
+    "attribution_quality": 1.0,
+    "avg_sii_v2": 66.07369389931021
+  }
+}

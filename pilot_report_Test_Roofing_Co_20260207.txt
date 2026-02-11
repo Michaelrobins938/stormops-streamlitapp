@@ -1,0 +1,62 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          STORMOPS PILOT REPORT                               ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+PILOT: Test Roofing Co
+CONTACT: Test User (test@roofing.com)
+STORM: All Storms
+DURATION: -1 days
+GENERATED: 2026-02-07
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OPERATIONAL METRICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Routes Generated:        0
+Total Jobs:              0
+Jobs Completed:          0
+Completion Rate:         0.0%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CONVERSION & ROI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Properties Contacted:    0
+Conversions:             0
+Conversion Rate:         0.0%
+
+Total Claim Value:       $0
+Avg Claim Value:         $0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INCREMENTALITY (TREAT VS HOLD)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Treated Properties:      0 (None converted = 0.0%)
+Held Properties:         0 (None converted = 0.0%)
+
+LIFT:                    +0.0 percentage points
+INTERPRETATION:          No measurable lift yet
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SUCCESS CRITERIA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Routes per Storm:      0 (target: 3+)
+✗ Jobs Completed:        0 (target: 50+)
+✗ Completion Rate:       0.0% (target: 80%+)
+✗ Conversion Rate:       0.0% (target: 20%+)
+
+OVERALL STATUS:          🟡 IN PROGRESS
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Continue pilot - track weekly progress
+• Schedule feedback call
+• Document learnings
+• Use as case study for next pilots
+
+╚══════════════════════════════════════════════════════════════════════════════╝

@@ -1,0 +1,6 @@
+feature,count,mean,stddev,min,max
+estimated_value,100,318324.0,105290.0,153132.0,497897.0
+risk_score,100,64.9,14.9,35.0,95.0
+insurance_burden_ratio,100,0.033,0.0167,0.0061,0.0768
+equity_risk_score,100,40.8,19.6,10.0,70.0
+market_opportunity_score,100,87.6,16.2,35.5,100.0

@@ -1,0 +1,220 @@
+STORMOPS DATA FLOW ARCHITECTURE
+================================
+
+LAYER 1: INGESTION (Public Data Sources)
+----------------------------------------
+NOAA Storm Events → storm_events_raw
+Open-Meteo Forecasts → sector_forecasts_raw
+NWS Alerts → weather_alerts_raw
+FEMA Hailstorms → hail_footprints_raw
+TxGIO Parcels → parcels (static)
+
+LAYER 2: NORMALIZATION (ETL Transforms)
+----------------------------------------
+storm_events_raw → storm_events
+sector_forecasts_raw → sector_forecasts
+weather_alerts_raw → weather_alerts
+hail_footprints_raw → hail_footprints
+
+LAYER 3: FEATURE ENGINEERING (MOE + SII Inputs)
+------------------------------------------------
+storm_events + sector_forecasts + weather_alerts
+    ↓
+FeatureEngineer.compute_sector_features()
+    ↓
+sector_features (hail_avg, wind_max, cape, alert_count, moe_state)
+
+parcels + storm_events
+    ↓
+FeatureEngineer.compute_parcel_impacts()
+    ↓
+parcel_impacts (sii_score, damage_probability)
+
+LAYER 4: TRIGGER SERVICE (Proposal Emission)
+---------------------------------------------
+sector_features (moe_state, hail_intensity_max)
+    ↓
+TriggerService.check_triggers()
+    ↓
+IF hail > 1" → emit lead_gen Proposal
+IF hail > 1.5" → emit route_build Proposal
+IF moe_state = 'risk' → emit sms_campaign Proposal
+IF hail > 2" → emit impact_report Proposal
+    ↓
+proposals (pending, ready for operator approval)
+
+LAYER 5: CONTROL PLANE (Agentic Execution)
+-------------------------------------------
+proposals (pending)
+    ↓
+Operator reviews in Streamlit UI
+    ↓
+Operator clicks "Approve"
+    ↓
+ProposalEngine.approve_proposal()
+    ↓
+CRM Integration (ServiceTitan/JobNimbus)
+    ↓
+leads created, routes built, SMS sent, reports queued
+
+LAYER 6: OPERATIONS (Field Execution)
+--------------------------------------
+Field reps receive routes on mobile
+    ↓
+Reps knock doors, inspect roofs
+    ↓
+CRM webhooks update lead_status (contacted → inspected → closed)
+    ↓
+SLAMonitor tracks time-to-contact, claim acceptance
+    ↓
+MOE recalibrates based on outcomes
+
+LAYER 7: FEEDBACK LOOP (Continuous Learning)
+---------------------------------------------
+Real outcomes (claims filed, accepted, rejected)
+    ↓
+Compare vs SII predictions
+    ↓
+Retrain SII model
+    ↓
+Improve future forecasts
+
+DATA TABLES BY LAYER
+====================
+
+Ingestion (Raw):
+- storm_events_raw
+- sector_forecasts_raw
+- weather_alerts_raw
+- hail_footprints_raw
+
+Normalization:
+- storm_events
+- sector_forecasts
+- weather_alerts
+- hail_footprints
+
+Static Reference:
+- parcels (TxGIO StratMap)
+- sectors (geographic groupings)
+
+Feature Engineering:
+- sector_features (MOE inputs)
+- parcel_impacts (SII outputs)
+
+Control Plane:
+- proposals (lead_gen, route_build, sms_campaign, impact_report)
+- leads (CRM sync)
+- routes (canvassing)
+- impact_reports (physics-backed)
+
+Operations:
+- moe_state (Markov state per sector)
+- crm_sync_log (webhook tracking)
+- trigger_log (trigger execution history)
+
+TRIGGER RULES
+=============
+
+Trigger 1: Lead Generation
+- Condition: hail_intensity_max_mm > 25.4 (1")
+- Action: emit lead_gen Proposal (SII >= 60)
+- Expected: 400-600 leads, $2.1M pipeline
+
+Trigger 2: Route Building
+- Condition: hail_intensity_max_mm > 38 (1.5")
+- Action: emit route_build Proposal (SII >= 70, 4 canvassers)
+- Expected: 4 routes, ~50 roofs each
+
+Trigger 3: SMS Campaign
+- Condition: moe_state = 'risk'
+- Action: emit sms_campaign Proposal (past customers)
+- Expected: 800 messages, $1.8M pipeline
+
+Trigger 4: Impact Reports
+- Condition: hail_intensity_max_mm > 50 (2")
+- Action: emit impact_report Proposal (SII >= 75)
+- Expected: 630 reports, +25% claim acceptance
+
+MOE STATE TRANSITIONS
+====================
+
+Baseline (no hail, no alerts)
+    ↓ (hail > 1" OR alert)
+Risk (elevated threat, pre-position crews)
+    ↓ (hail > 1.5" OR active alert)
+Impact (active storm, full deployment)
+    ↓ (hail passes, 24-72h window)
+Recovery (peak money window, 1.5x surge)
+    ↓ (72h+ post-event)
+Baseline
+
+FEATURE COMPUTATION SCHEDULE
+============================
+
+Every 5 minutes:
+- Ingest NWS alerts
+- Update sector_forecasts
+
+Every 15 minutes:
+- Ingest Open-Meteo forecasts
+- Compute sector_features
+- Check triggers
+
+Every hour:
+- Transform raw → normalized
+- Compute parcel_impacts
+- Emit Proposals
+
+Daily:
+- Ingest NOAA Storm Events
+- Ingest FEMA Hailstorms
+- Data quality checks
+
+EXAMPLE FLOW (Live Event)
+=========================
+
+T+0: Storm detected by Earth-2
+  → Ingestion Service pulls hail swath
+  → storm_events_raw populated
+
+T+5: Feature Engineering runs
+  → sector_features computed (hail_avg, wind_max, moe_state)
+  → parcel_impacts computed (sii_score for all roofs)
+
+T+10: Trigger Service runs
+  → hail > 1" detected
+  → lead_gen Proposal emitted (1,680 leads, $2.1M)
+  → sms_campaign Proposal emitted (800 customers, $1.8M)
+
+T+15: Operator reviews in UI
+  → Sees 2 pending Proposals
+  → Clicks "Approve" on both
+
+T+20: Proposals execute
+  → 1,680 leads created in ServiceTitan
+  → 800 SMS messages sent
+  → CRM webhooks fire
+
+T+25: Route Building runs
+  → hail > 1.5" detected
+  → route_build Proposal emitted (4 routes, 200 roofs)
+
+T+30: Operator approves routes
+  → Routes pushed to field rep devices
+  → Reps begin canvassing
+
+T+60: First inspections complete
+  → Leads marked "inspected" in CRM
+  → SLA timer: 45 minutes (target: 15 min)
+
+T+120: Peak money window
+  → MOE state = 'recovery'
+  → Surge multiplier = 1.5x
+  → Comp/ad spend increased
+
+T+72h: Event closes
+  → MOE state = 'baseline'
+  → Claims filed and processed
+  → Outcomes compared vs SII predictions
+  → Model recalibrated

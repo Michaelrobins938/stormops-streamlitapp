@@ -1,0 +1,28 @@
+{
+  "total_leads": 61,
+  "avg_sii": 90.49180327868852,
+  "avg_value": 329017.4918032787,
+  "avg_risk": 74.01639344262296,
+  "risk_tiers": {
+    "Very High": 31,
+    "High": 30
+  },
+  "personas": {
+    "Deal_Hunter": 27,
+    "Proof_Seeker": 17,
+    "Family_Protector": 11,
+    "Status_Conscious": 6
+  },
+  "top_plays": {
+    "Financing_Standard": 15,
+    "Financing_Aggressive": 12,
+    "Impact_Report_Premium": 9,
+    "Impact_Report_Standard": 8,
+    "Safety_Standard": 6
+  },
+  "opportunity_tiers": {
+    "Medium_Opportunity": 41,
+    "High_Opportunity": 14,
+    "Standard": 6
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(python -c:*)",
+      "Bash(pgrep:*)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)",
+      "Bash(:)",
+      "Bash(curl:*)",
+      "Bash(uv run python -c \" import sys, io sys.argv = [''streamlit'', ''run'', ''app.py''] try: exec\\(open\\(''app.py''\\).read\\(\\)\\) except SystemExit: pass except Exception as e: print\\(f''ERROR: {type\\(e\\).__name__}: {e}'', file=sys.stderr\\) import traceback traceback.print_exc\\(\\) \")",
+      "Bash(uv run python:*)",
+      "Bash(uv add:*)",
+      "Bash(uv run streamlit run:*)",
+      "Bash(lsof:*)",
+      "Bash(where:*)",
+      "Bash(openclaw:*)",
+      "Bash(openclaw --help:*)",
+      "Bash(fuser:*)"
+    ]
+  }
+}

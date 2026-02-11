@@ -1,0 +1,34 @@
+{
+  "team": "DFW Elite Roofing",
+  "plays": [
+    {
+      "id": "financing_aggressive",
+      "name": "Financing Aggressive",
+      "channels": [
+        "door_knock",
+        "sms",
+        "call"
+      ],
+      "message": "0% financing + free inspection + price match guarantee",
+      "target_personas": [
+        "Deal_Hunter"
+      ],
+      "sla_hours": 12
+    },
+    {
+      "id": "impact_report_premium",
+      "name": "Impact Report Premium",
+      "channels": [
+        "door_knock",
+        "email",
+        "call"
+      ],
+      "message": "Physics-grade damage assessment with adjuster documentation",
+      "target_personas": [
+        "Proof_Seeker"
+      ],
+      "sla_hours": 24
+    }
+  ],
+  "created": "2026-02-07T07:24:02.842592"
+}

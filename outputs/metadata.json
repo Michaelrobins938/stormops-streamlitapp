@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-02-06T14:49:20.755658Z",
+  "description": "FCN-based storm impact score over DFW for last forecast run",
+  "time_slice_start": 0,
+  "time_slice_end": 20,
+  "total_zips_analyzed": 123,
+  "high_risk_count": 0,
+  "max_storm_score": 0.10103156417608261
+}
