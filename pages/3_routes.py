@@ -27,6 +27,68 @@ st.divider()
 # Connect to DB
 engine = create_engine("sqlite:///stormops_cache.db")
 
+# Initialize tables if they don't exist
+with engine.begin() as conn:
+    conn.execute(
+        text("""
+        CREATE TABLE IF NOT EXISTS routes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            route_id TEXT UNIQUE,
+            storm_id TEXT,
+            tenant_id TEXT,
+            name TEXT,
+            zip_code TEXT,
+            property_count INTEGER DEFAULT 0,
+            status TEXT DEFAULT 'pending',
+            assigned_crew TEXT,
+            total_doors INTEGER DEFAULT 0,
+            completed_doors INTEGER DEFAULT 0,
+            estimated_value DECIMAL(12,2) DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    )
+    conn.execute(
+        text("""
+        CREATE TABLE IF NOT EXISTS jobs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            job_id TEXT UNIQUE,
+            lead_id INTEGER,
+            route_id INTEGER,
+            address TEXT,
+            status TEXT DEFAULT 'pending',
+            claim_amount DECIMAL(12,2) DEFAULT 0,
+            damage_type TEXT,
+            notes TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            completed_at TIMESTAMP
+        )
+    """)
+    )
+
+    # Insert demo data if empty
+    result = conn.execute(text("SELECT COUNT(*) FROM routes"))
+    if result.fetchone()[0] == 0:
+        conn.execute(
+            text("""
+            INSERT INTO routes (route_id, storm_id, tenant_id, name, zip_code, property_count, status, assigned_crew, total_doors, completed_doors, estimated_value)
+            VALUES 
+                ('route-001', 'demo-storm', 'demo-tenant', 'North Dallas Premium', '75201', 145, 'in_progress', 'Crew A', 145, 67, 18900000),
+                ('route-002', 'demo-storm', 'demo-tenant', 'Plano East Cluster', '75024', 98, 'assigned', 'Crew B', 98, 45, 12400000),
+                ('route-003', 'demo-storm', 'demo-tenant', 'Frisco Central', '75034', 124, 'pending', NULL, 124, 0, 16750000)
+        """)
+        )
+        conn.execute(
+            text("""
+            INSERT INTO jobs (job_id, lead_id, route_id, address, status, claim_amount, damage_type, notes)
+            VALUES 
+                ('job-001', 'lead-001', 'route-001', '123 Main St', 'completed', 18500, 'hail', 'Completed exterior inspection'),
+                ('job-002', 'lead-003', 'route-001', '456 Oak Ave', 'in_progress', 0, 'hail', 'In-progress roof assessment'),
+                ('job-003', 'lead-005', 'route-002', '789 Pine Rd', 'pending', 0, 'hail', 'Scheduled for tomorrow'),
+                ('job-004', 'lead-007', 'route-002', '321 Elm Blvd', 'pending', 0, 'wind', 'Waiting for permit')
+        """)
+        )
+
 # Hardcoded for demo
 tenant_id = "demo-tenant"
 storm_id = "demo-storm"
